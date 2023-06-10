@@ -60,9 +60,9 @@ public class BlogController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<String> updateBlogPost(@PathVariable long id, @RequestBody Book book) {
+    ResponseEntity<String> updateBlogPost(@PathVariable long id, @RequestBody Blog blog) {
         try {
-            Blog updatedBlogPost = blogService.updateById(id, book);
+            Blog updatedBlogPost = blogService.updateById(id, blog);
             return ResponseEntity.ok("Book successfully updated: " + updatedBlogPost.toString());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to update blog post");
