@@ -39,11 +39,10 @@ public class BlogController {
     }
 
     @PostMapping
-    ResponseEntity<String> saveBlogPost(@RequestBody Blog request) {
+    ResponseEntity<?> saveBlogPost(@RequestBody Blog request) {
         try {
-            Blog blogRequest = request;
-            Long savedBookId = blogService.save(blogRequest);
-            return ResponseEntity.created(null).body("Created blog post id: " + savedBookId);
+            Blog savedBlogPost = blogService.save(request);
+            return ResponseEntity.created(null).body(savedBlogPost);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to update blog post");
         }

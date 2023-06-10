@@ -24,10 +24,10 @@ public class BlogService {
         return blogRepository.findById(id).orElseThrow(Exception::new);
     }
 
-    public Long save(Blog blog) throws Exception {
+    public Blog save(Blog blog) throws Exception {
         try {
             Blog savedBlog = blogRepository.save(blog);
-            return savedBlog.getId();
+            return savedBlog;
         } catch (Exception e) {
             throw new Exception("Failed to save blog");
         }
