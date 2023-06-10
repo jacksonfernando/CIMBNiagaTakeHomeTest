@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.blog.entity.Blog;
@@ -27,8 +28,10 @@ public class BlogController {
     }
 
     @GetMapping
-    ResponseEntity<List<Blog>> fetchAllBlogPosts() {
-        List<Blog> books = blogService.findAll();
+    ResponseEntity<List<Blog>> fetchAllBlogPosts(
+            @RequestParam(defaultValue = "5", required = false) Integer limit,
+            @RequestParam(defaultValue = "0", required = false) Integer offset) {
+        List<Blog> books = blogService.findAll(limit, offset);
         return ResponseEntity.ok(books);
     }
 
@@ -44,7 +47,7 @@ public class BlogController {
             Blog savedBlogPost = blogService.save(request);
             return ResponseEntity.created(null).body(savedBlogPost);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Failed to update blog post");
+            return ResponseEntity.status(500).body("Failed to save blog post");
         }
     }
 
@@ -54,18 +57,17 @@ public class BlogController {
             blogService.delete(id);
             return ResponseEntity.ok("Deleted blog post id: " + id);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Failed to update blog post");
+            return ResponseEntity.status(500).body("Failed to delete blog post");
         }
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<String> updateBlogPost(@PathVariable long id, @RequestBody Blog blog) {
+    ResponseEntity<?> updateBlogPost(@PathVariable long id, @RequestBody Blog blog) {
         try {
             Blog updatedBlogPost = blogService.updateById(id, blog);
-            return ResponseEntity.ok("Book successfully updated: " + updatedBlogPost.toString());
+            return ResponseEntity.ok(updatedBlogPost);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Failed to update blog post");
         }
     }
-
 }
