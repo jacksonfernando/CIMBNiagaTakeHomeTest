@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.blog.dto.response.ListBlogsResponseDTO;
 import com.example.blog.entity.Blog;
 import com.example.blog.service.BlogService;
 
@@ -28,11 +29,15 @@ public class BlogController {
     }
 
     @GetMapping
-    ResponseEntity<List<Blog>> fetchAllBlogPosts(
+    ResponseEntity<?> fetchAllBlogPosts(
             @RequestParam(defaultValue = "5", required = false) Integer limit,
             @RequestParam(defaultValue = "0", required = false) Integer offset) {
-        List<Blog> books = blogService.findAll(limit, offset);
-        return ResponseEntity.ok(books);
+        try {
+            ListBlogsResponseDTO books = blogService.findAll(limit, offset);
+            return ResponseEntity.ok(books);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Failed to save fetch all blog posts");
+        }
     }
 
     @GetMapping("/{id}")

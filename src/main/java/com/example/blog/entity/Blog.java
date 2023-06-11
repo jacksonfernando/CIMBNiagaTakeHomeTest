@@ -13,6 +13,15 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "body")
+    private String body;
+
+    @Column(name = "author")
+    private String author;
+
     public Blog() {
     }
 
@@ -101,13 +110,4 @@ public class Blog {
                 ", author='" + getAuthor() + "'" +
                 "}";
     }
-
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "body")
-    private String body;
-
-    @Column(name = "author")
-    private String author;
 }

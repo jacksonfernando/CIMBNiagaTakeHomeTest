@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.blog.dto.response.ListBlogsResponseDTO;
 import com.example.blog.entity.Blog;
 import com.example.blog.repository.BlogRepository;
 
@@ -21,12 +22,17 @@ public class BlogService {
         this.blogRepository = repository;
     }
 
-    public List<Blog> findAll(int limit, int offset) {
+    public ListBlogsResponseDTO findAll(int limit, int offset) throws Exception {
         List<Blog> blogs = new ArrayList<Blog>();
         Pageable sortedById = PageRequest.of(offset, limit, Sort.by("id").ascending());
         Page<Blog> pageBlogPosts = blogRepository.findAll(sortedById);
         blogs = pageBlogPosts.getContent();
-        return blogs;
+        ListBlogsResponseDTO response = new ListBlogsResponseDTO(
+                blogs,
+                pageBlogPosts.getTotalPages(),
+                pageBlogPosts.getNumberOfElements(),
+                pageBlogPosts.getNumber());
+        return response;
     }
 
     public Blog getById(Long id) throws Exception {
