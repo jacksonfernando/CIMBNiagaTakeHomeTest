@@ -3,6 +3,7 @@ package com.example.blog.dto.response;
 import java.util.List;
 
 import com.example.blog.entity.Blog;
+import java.util.Objects;
 
 public class ListBlogsResponseDTO {
     private List<Blog> blogPosts;
@@ -12,6 +13,9 @@ public class ListBlogsResponseDTO {
     private int totalItem;
 
     private int currentPage;
+
+    public ListBlogsResponseDTO() {
+    }
 
     public ListBlogsResponseDTO(List<Blog> blogPosts, int totalPage, int totalItem, int currentPage) {
         this.blogPosts = blogPosts;
@@ -52,4 +56,50 @@ public class ListBlogsResponseDTO {
         this.currentPage = currentPage;
     }
 
+    public ListBlogsResponseDTO blogPosts(List<Blog> blogPosts) {
+        setBlogPosts(blogPosts);
+        return this;
+    }
+
+    public ListBlogsResponseDTO totalPage(int totalPage) {
+        setTotalPage(totalPage);
+        return this;
+    }
+
+    public ListBlogsResponseDTO totalItem(int totalItem) {
+        setTotalItem(totalItem);
+        return this;
+    }
+
+    public ListBlogsResponseDTO currentPage(int currentPage) {
+        setCurrentPage(currentPage);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof ListBlogsResponseDTO)) {
+            return false;
+        }
+        ListBlogsResponseDTO listBlogsResponseDTO = (ListBlogsResponseDTO) o;
+        return Objects.equals(blogPosts, listBlogsResponseDTO.blogPosts) && totalPage == listBlogsResponseDTO.totalPage
+                && totalItem == listBlogsResponseDTO.totalItem && currentPage == listBlogsResponseDTO.currentPage;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(blogPosts, totalPage, totalItem, currentPage);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " blogPosts='" + getBlogPosts() + "'" +
+                ", totalPage='" + getTotalPage() + "'" +
+                ", totalItem='" + getTotalItem() + "'" +
+                ", currentPage='" + getCurrentPage() + "'" +
+                "}";
+    }
 }
