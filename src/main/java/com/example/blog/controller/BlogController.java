@@ -36,7 +36,7 @@ public class BlogController {
             ListBlogsResponseDTO books = blogService.findAll(limit, offset);
             return ResponseEntity.ok(books);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Failed to save fetch all blog posts");
+            return ResponseEntity.status(500).body("Failed to fetch all blog posts");
         }
     }
 
