@@ -64,26 +64,6 @@ public class Blog {
         this.author = author;
     }
 
-    public Blog id(long id) {
-        setId(id);
-        return this;
-    }
-
-    public Blog title(String title) {
-        setTitle(title);
-        return this;
-    }
-
-    public Blog body(String body) {
-        setBody(body);
-        return this;
-    }
-
-    public Blog author(String author) {
-        setAuthor(author);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)

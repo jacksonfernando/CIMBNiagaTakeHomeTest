@@ -28,7 +28,7 @@ import com.example.blog.entity.Blog;
 import com.example.blog.repository.BlogRepository;
 
 @SpringBootTest
-public class BlogServiceTests {
+public class BlogServiceTest {
     Blog blog = new Blog();
 
     @Mock

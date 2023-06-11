@@ -56,26 +56,6 @@ public class ListBlogsResponseDTO {
         this.currentPage = currentPage;
     }
 
-    public ListBlogsResponseDTO blogPosts(List<Blog> blogPosts) {
-        setBlogPosts(blogPosts);
-        return this;
-    }
-
-    public ListBlogsResponseDTO totalPage(int totalPage) {
-        setTotalPage(totalPage);
-        return this;
-    }
-
-    public ListBlogsResponseDTO totalItem(int totalItem) {
-        setTotalItem(totalItem);
-        return this;
-    }
-
-    public ListBlogsResponseDTO currentPage(int currentPage) {
-        setCurrentPage(currentPage);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
