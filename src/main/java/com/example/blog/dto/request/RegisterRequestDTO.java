@@ -31,16 +31,6 @@ public class RegisterRequestDTO {
         this.password = password;
     }
 
-    public RegisterRequestDTO username(String username) {
-        setUsername(username);
-        return this;
-    }
-
-    public RegisterRequestDTO password(String password) {
-        setPassword(password);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
