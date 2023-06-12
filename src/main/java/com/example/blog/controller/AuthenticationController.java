@@ -21,14 +21,17 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponseDTO> register(
             @RequestBody RegisterRequestDTO request) {
-        return ResponseEntity.ok(authenticationService.register(request));
+        AuthenticationResponseDTO response = authenticationService.register(request);
+        return ResponseEntity.created(null).body(response);
 
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDTO> authenticate(
-            @RequestBody RegisterRequestDTO request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
-
+    public ResponseEntity<?> authenticate(@RequestBody RegisterRequestDTO request) {
+        try {
+            return ResponseEntity.ok(authenticationService.authenticate(request));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Failed to authenticate");
+        }
     }
 }

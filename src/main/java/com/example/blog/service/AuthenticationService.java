@@ -35,10 +35,10 @@ public class AuthenticationService {
         return new AuthenticationResponseDTO(jwtToken);
     }
 
-    public AuthenticationResponseDTO authenticate(RegisterRequestDTO request) {
+    public AuthenticationResponseDTO authenticate(RegisterRequestDTO request) throws Exception {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        User foundedUser = repository.findByUsername(request.getUsername()).orElseThrow(null);
+        User foundedUser = repository.findByUsername(request.getUsername()).orElseThrow(Exception::new);
         String jwtToken = jwtService.generateToken(foundedUser);
         return new AuthenticationResponseDTO(jwtToken);
     }
