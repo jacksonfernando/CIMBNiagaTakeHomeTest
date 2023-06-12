@@ -2,15 +2,15 @@ package com.example.blog.dto.request;
 
 import java.util.Objects;
 
-public class RegisterRequest {
+public class RegisterRequestDTO {
     private String username;
 
     private String password;
 
-    public RegisterRequest() {
+    public RegisterRequestDTO() {
     }
 
-    public RegisterRequest(String username, String password) {
+    public RegisterRequestDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -31,12 +31,12 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public RegisterRequest username(String username) {
+    public RegisterRequestDTO username(String username) {
         setUsername(username);
         return this;
     }
 
-    public RegisterRequest password(String password) {
+    public RegisterRequestDTO password(String password) {
         setPassword(password);
         return this;
     }
@@ -45,10 +45,10 @@ public class RegisterRequest {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof RegisterRequest)) {
+        if (!(o instanceof RegisterRequestDTO)) {
             return false;
         }
-        RegisterRequest registerRequest = (RegisterRequest) o;
+        RegisterRequestDTO registerRequest = (RegisterRequestDTO) o;
         return Objects.equals(username, registerRequest.username) && Objects.equals(password, registerRequest.password);
     }
 }

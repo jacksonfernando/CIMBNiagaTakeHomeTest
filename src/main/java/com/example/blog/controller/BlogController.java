@@ -19,7 +19,7 @@ import com.example.blog.entity.Blog;
 import com.example.blog.service.BlogService;
 
 @RestController
-@RequestMapping("blog-posts")
+@RequestMapping("/api/v1/blog-posts")
 public class BlogController {
     BlogService blogService;
 
