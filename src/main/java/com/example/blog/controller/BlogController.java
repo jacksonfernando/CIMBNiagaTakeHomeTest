@@ -1,7 +1,5 @@
 package com.example.blog.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +17,7 @@ import com.example.blog.entity.Blog;
 import com.example.blog.service.BlogService;
 
 @RestController
-@RequestMapping("blog-posts")
+@RequestMapping("/api/v1/blog-posts")
 public class BlogController {
     BlogService blogService;
 

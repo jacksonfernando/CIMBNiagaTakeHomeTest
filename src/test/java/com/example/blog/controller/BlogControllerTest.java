@@ -57,7 +57,7 @@ public class BlogControllerTest {
         when(blogService.save(blog)).thenReturn(blog);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/blog-posts")
+                .post("/api/v1/blog-posts")
                 .content(objectMapper.writeValueAsBytes(blog))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -69,7 +69,7 @@ public class BlogControllerTest {
         doThrow(new IllegalArgumentException("Failed to save blog post")).when(blogService).save(blog);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .post("/blog-posts")
+                .post("/api/v1/blog-posts")
                 .content(objectMapper.writeValueAsBytes(blog))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -86,7 +86,7 @@ public class BlogControllerTest {
         when(blogService.findAll(limit, offset)).thenReturn(fetchedBlogs);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/blog-posts")
+                .get("/api/v1/blog-posts")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.blogPosts[0].title").value(blog.getTitle()))
@@ -100,7 +100,7 @@ public class BlogControllerTest {
         when(blogService.findAll(limit, offset)).thenThrow(new Exception("Internal server error"));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/blog-posts")
+                .get("/api/v1/blog-posts")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError());
     }
@@ -110,7 +110,7 @@ public class BlogControllerTest {
         when(blogService.getById(blog.getId())).thenReturn(blog);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/blog-posts/1")
+                .get("/api/v1/blog-posts/1")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(blog.getTitle()))
@@ -124,7 +124,7 @@ public class BlogControllerTest {
         when(blogService.updateById(Long.parseLong("1"), newBlogPost)).thenReturn(newBlogPost);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/blog-posts/1")
+                .put("/api/v1/blog-posts/1")
                 .content(objectMapper.writeValueAsBytes(newBlogPost))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -140,7 +140,7 @@ public class BlogControllerTest {
                 .thenThrow(new Exception("Failed to update blog posts"));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .put("/blog-posts/1")
+                .put("/api/v1/blog-posts/1")
                 .content(objectMapper.writeValueAsBytes(newBlogPost))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError());
@@ -151,7 +151,7 @@ public class BlogControllerTest {
         doNothing().when(blogService).delete(Long.parseLong("1"));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/blog-posts/1")
+                .delete("/api/v1/blog-posts/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -163,7 +163,7 @@ public class BlogControllerTest {
                 .delete(blog.getId());
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/blog-posts/1")
+                .delete("/api/v1/blog-posts/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError());
     };
