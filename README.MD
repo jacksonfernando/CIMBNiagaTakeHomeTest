@@ -25,5 +25,5 @@
 ![image](https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/authenticate.png)
 - If you already had user registered, use authentication endpoint. The endpoint will return a token that will be use as a authorizaton header of other endpoint.
 ![image](https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/authenticate.png)
-
-## 
+- After you get the token, make sure to include token in authorization header when hitting an endpoint
+![image](https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/after_token.png)
