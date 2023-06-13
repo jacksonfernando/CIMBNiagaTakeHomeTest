@@ -14,6 +14,6 @@
 
 ## Registration & Authentication flow
 - After the service is running, register new user before using other endpoint
-![image][https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/authenticate.png]
+![image](https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/authenticate.png)
 - If you already have user registered, use authentication endpoint like below
-![image][https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/authenticate.png]
+![image](https://github.com/jacksonfernando/CIMBNiagaTakeHomeTest/blob/master/images/authenticate.png)
