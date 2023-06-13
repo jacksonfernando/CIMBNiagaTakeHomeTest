@@ -47,14 +47,27 @@ public class AuthenticationServiceTest {
         User user = new User("jackson", "jackson123");
         RegisterRequestDTO request = new RegisterRequestDTO("jackson", "jackson123");
         when(passwordEncoder.encode(request.getPassword())).thenReturn("encoded jackson123");
-        user.setPassword("encoded jackson123");
         when(userRepository.save(user)).thenReturn(user);
-        user.setId(1);
         when(jwtService.generateToken(user)).thenReturn(token);
 
         AuthenticationResponseDTO result = authenticationService.register(request);
 
         assertEquals(result.getToken(), null);
+    }
+
+    @Test
+    public void testRegister_should_throw_error_when_user_already_registered() throws Exception {
+        User user = new User("jackson", "jackson123");
+        RegisterRequestDTO request = new RegisterRequestDTO("jackson", "jackson123");
+        Optional<User> optionalUser = Optional.of(user);
+        when(userRepository.findByUsername(request.getUsername())).thenReturn(optionalUser);
+        doThrow(new IllegalArgumentException("Failed to find user by username"))
+                .when(userRepository)
+                .findByUsername(request.getUsername());
+
+        assertThrows(Exception.class, () -> {
+            authenticationService.register(request);
+        });
     }
 
     @Test

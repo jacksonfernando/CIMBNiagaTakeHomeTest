@@ -19,10 +19,14 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponseDTO> register(
-            @RequestBody RegisterRequestDTO request) {
-        AuthenticationResponseDTO response = authenticationService.register(request);
-        return ResponseEntity.created(null).body(response);
+    public ResponseEntity<?> register(
+            @RequestBody RegisterRequestDTO request) throws Exception {
+        try {
+            AuthenticationResponseDTO response = authenticationService.register(request);
+            return ResponseEntity.created(null).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
 
     }
 

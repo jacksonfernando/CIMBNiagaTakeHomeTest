@@ -26,7 +26,11 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthenticationResponseDTO register(RegisterRequestDTO request) {
+    public AuthenticationResponseDTO register(RegisterRequestDTO request) throws Exception {
+        User foundedUser = repository.findByUsername(request.getUsername()).orElse(null);
+        if (foundedUser != null) {
+            throw new Exception("User already registered");
+        }
         User user = new User(
                 request.getUsername(),
                 passwordEncoder.encode(request.getPassword()));
